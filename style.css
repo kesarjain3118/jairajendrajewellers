@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-soft-cream text-rich-brown font-inter;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply bg-rich-brown text-soft-cream rounded-md py-3 px-8 font-medium shadow-md transition-all duration-300 ease-in-out inline-block cursor-pointer;
+  }
+  .btn-primary:hover {
+    @apply bg-elegant-gold shadow-lg -translate-y-0.5 scale-105;
+  }
+
+  /* Navbar */
+  .navbar {
+    @apply fixed top-0 left-0 w-full z-[1000] bg-soft-cream/90 backdrop-blur-sm shadow-sm;
+  }
+  .nav-link {
+    @apply text-rich-brown relative pb-1 transition-colors duration-300;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-elegant-gold transition-all duration-300;
+  }
+  .nav-link:hover {
+    @apply text-elegant-gold;
+  }
+  .nav-link:hover::after, .nav-link.active::after {
+    @apply w-full;
+  }
+  .nav-link.active {
+    @apply text-elegant-gold font-semibold;
+  }
+
+  /* Mobile Menu Panel */
+  .nav-mobile {
+    @apply fixed top-20 left-0 w-full bg-soft-cream/95 backdrop-blur-sm shadow-lg p-6 z-[999];
+    @apply flex flex-col items-center space-y-6 text-lg;
+    @apply transform -translate-y-[150%] transition-transform duration-500 ease-in-out;
+  }
+  .nav-mobile.is-open {
+    @apply transform translate-y-0;
+  }
+
+  /* Filter Buttons */
+  .filter-button {
+    @apply bg-transparent text-rich-brown font-semibold border border-elegant-gold/50 transition-all duration-300 py-2.5 px-6 rounded-full;
+  }
+  .filter-button.active {
+    @apply bg-elegant-gold text-soft-cream shadow-md border-elegant-gold;
+  }
+  .filter-button:hover:not(.active) {
+    @apply bg-elegant-gold/10;
+  }
+  
+  /* WhatsApp Button */
+  .whatsapp-button {
+    @apply fixed bottom-5 right-5 bg-[#25D366] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg z-[1000] transition-all duration-300 ease-in-out cursor-pointer;
+  }
+  .whatsapp-button:hover {
+    @apply bg-[#128C7E] scale-105;
+  }
+}

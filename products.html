@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Collection - JAI RAJENDRA JEWELLERS</title>
+
+  <link rel="stylesheet" href="dist/output.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --soft-cream:#fbf5ee;
+      --cream-variant:#f8efe6;
+      --rich-brown:#3f2f26;
+      --elegant-gold:#b8863e;
+      --filter-pill:#e9d9c1;
+      --muted-text:#6b5a4f;
+    }
+
+    body{
+      margin:0; background:var(--soft-cream);
+      font-family:"Inter"; color:var(--rich-brown);
+    }
+
+    /* HEADER */
+    .navbar{
+      position:sticky; top:0; z-index:1000;
+      background:var(--soft-cream);
+      box-shadow:0 2px 5px #00000010;
+    }
+    .nav-link{color:var(--muted-text);transition:.2s;}
+    .nav-link:hover{color:var(--elegant-gold);}
+    .nav-link.active{
+      color:var(--rich-brown);
+      text-decoration:underline;
+      text-underline-offset:4px;
+      text-decoration-color:var(--elegant-gold);
+      text-decoration-thickness:2px;
+    }
+    .nav-mobile{
+      display:none;flex-direction:column;gap:14px;
+      padding:20px;text-align:center;
+      background:var(--cream-variant);
+    }
+    .nav-mobile.open{display:flex;}
+
+    /* FILTERS */
+    .section-wrapper{max-width:1200px;margin:auto;padding:40px 24px 10px;}
+    .page-title{font-family:"Playfair Display";font-size:46px;margin:0 0 22px;}
+
+    .filters{display:flex;gap:12px;flex-wrap:wrap;}
+    .pill{
+      background:var(--filter-pill);border-radius:999px;
+      padding:8px 18px;font-size:14px;font-weight:500;
+      cursor:pointer;border:1px solid #0001;transition:.15s;
+    }
+    .pill.active{background:var(--elegant-gold);color:#fff;}
+
+    /* GRID */
+    .grid-container{max-width:1200px;margin:auto;padding:0 24px;}
+    .grid-products{
+      display:grid;gap:28px;
+      grid-template-columns:repeat(3,1fr);
+      padding-bottom:50px;
+    }
+    @media(max-width:1024px){.grid-products{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.grid-products{grid-template-columns:1fr}}
+
+    .card{
+      background:white;border-radius:12px;overflow:hidden;
+      box-shadow:0 6px 16px #0001;transition:.2s;cursor:pointer;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px #0003;}
+
+    .media{width:100%;aspect-ratio:1/1;overflow:hidden;}
+    .media img{
+      width:100%;height:100%;object-fit:cover;object-position:center;
+    }
+
+    .info{
+      background:var(--cream-variant);padding:18px;text-align:center;
+    }
+    .info h3{
+      margin:0 0 12px;font-family:"Playfair Display";font-size:20px;
+    }
+    .btn-view{
+      border:1px solid var(--elegant-gold);color:var(--elegant-gold);
+      padding:8px 20px;border-radius:6px;font-size:14px;
+      cursor:pointer;transition:.2s;
+    }
+    .btn-view:hover{background:var(--elegant-gold);color:white;}
+
+    /* MODAL */
+    #zoomModal{
+      position:fixed; inset:0; display:none;
+      justify-content:center; align-items:center;
+      background:#00000000; padding:20px;
+      opacity:0; transition:0.3s;
+      z-index:2000;
+    }
+    #zoomModal.open{opacity:1;background:#00000070;}
+
+    .modal-card{
+      background:white;width:100%;max-width:800px;
+      padding:20px;border-radius:10px;
+      transform:scale(.95);transition:0.3s;
+      text-align:center;
+    }
+    #zoomModal.open .modal-card{transform:scale(1);}
+    .modal-card img{width:100%;max-height:600px;object-fit:contain;}
+
+    .modal-close{
+      position:absolute;top:20px;right:22px;
+      font-size:32px;border:0;border-radius:50%;
+      background:white;padding:4px 12px;cursor:pointer;
+      box-shadow:0 2px 8px #0004;
+    }
+
+    /* WHATSAPP */
+    .whatsapp-button{
+      position:fixed;bottom:20px;right:20px;
+      background:#25D366;width:50px;height:50px;
+      border-radius:50%;display:flex;align-items:center;
+      justify-content:center;color:white;z-index:2000;
+      box-shadow:0 4px 8px #0003;transition:.2s;
+    }
+    .whatsapp-button:hover{transform:scale(1.1);}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="navbar">
+  <div class="flex items-center justify-between py-5 px-6 md:px-12 max-w-7xl mx-auto">
+    <a href="index.html" class="text-2xl font-bold tracking-wide text-rich-brown font-playfair">
+      JAI RAJENDRA JEWELLERS
+    </a>
+
+    <ul class="hidden md:flex space-x-7 text-sm font-medium">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about_us.html" class="nav-link">About Us</a></li>
+      <li><a href="products.html" class="nav-link active">Products</a></li>
+      <li><a href="reviews_contact.html" class="nav-link">Contact & Reviews</a></li>
+      <li><a href="location.html" class="nav-link">Location</a></li>
+    </ul>
+
+    <button class="menu-icon md:hidden flex flex-col justify-around w-6 h-5"
+            aria-label="Toggle menu" id="menuToggle">
+      <span class="block h-0.5 w-full bg-rich-brown"></span>
+      <span class="block h-0.5 w-full bg-rich-brown"></span>
+      <span class="block h-0.5 w-full bg-rich-brown"></span>
+    </button>
+  </div>
+</nav>
+
+<nav id="mobile-menu" class="nav-mobile">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="about_us.html" class="nav-link">About Us</a>
+  <a href="products.html" class="nav-link active">Products</a>
+  <a href="reviews_contact.html" class="nav-link">Contact & Reviews</a>
+  <a href="location.html" class="nav-link">Location</a>
+</nav>
+
+<!-- FILTERS -->
+<section class="section-wrapper">
+  <h1 class="page-title">Our Collection</h1>
+
+  <div class="filters">
+    <button class="pill active" data-filter="all">All</button>
+    <button class="pill" data-filter="custom">Chokers</button>
+    <button class="pill" data-filter="necklaces">Necklaces</button>
+    <button class="pill" data-filter="earrings">Earrings</button>
+    <button class="pill" data-filter="bangles">Bangles</button>
+    <button class="pill" data-filter="others">Others</button>
+  </div>
+</section>
+
+<!-- PRODUCT GRID -->
+<main class="grid-container">
+  <div id="productGrid" class="grid-products">
+
+    <!-- CHOKERS -->
+    <div class="card" data-cat="custom">
+      <div class="media"><img src="images/choker.png"></div>
+      <div class="info"><h3>Regal Ruby Choker</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="custom">
+      <div class="media"><img src="images/choker2.png"></div>
+      <div class="info"><h3>Emerald Heritage Choker</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="custom">
+      <div class="media"><img src="images/choker3.png"></div>
+      <div class="info"><h3>Goddess Devi Bridal Choker</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <!-- NECKLACES -->
+    <div class="card" data-cat="necklaces">
+      <div class="media"><img src="images/diamond.png"></div>
+      <div class="info"><h3>Diamond Royalty Necklace</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="necklaces">
+      <div class="media"><img src="images/cust.png"></div>
+      <div class="info"><h3>Majestic Bridal Green Set</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="necklaces">
+      <div class="media"><img src="images/necklace.png"></div>
+      <div class="info"><h3>Classic Gold Necklace</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="necklaces">
+      <div class="media"><img src="images/necklace6.png"></div>
+      <div class="info"><h3>Grand Layered Haram</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="necklaces">
+      <div class="media"><img src="images/necklace7.png"></div>
+      <div class="info"><h3>Pearl Temple Necklace</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="necklaces">
+      <div class="media"><img src="images/haram.png"></div>
+      <div class="info"><h3>Traditional Lakshmi Haram</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="necklaces">
+      <div class="media"><img src="images/harm2.png"></div>
+      <div class="info"><h3>Kundan Temple Haram</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <!-- EARRINGS -->
+    <div class="card" data-cat="earrings">
+      <div class="media"><img src="images/ear.png"></div>
+      <div class="info"><h3>Temple Jhumka Earrings</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="earrings">
+      <div class="media"><img src="images/earings.png"></div>
+      <div class="info"><h3>Jhumka Earrings </h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="earrings">
+      <div class="media"><img src="images/earrings.png"></div>
+      <div class="info"><h3>Gold Teardrop Earrings</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="earrings">
+      <div class="media"><img src="images/earrings3.png"></div>
+      <div class="info"><h3>Peacock Stud Earrings</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <!-- BANGLES -->
+    <div class="card" data-cat="bangles">
+      <div class="media"><img src="images/bangles1.png"></div>
+      <div class="info"><h3>Temple Gold Bangles</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="bangles">
+      <div class="media"><img src="images/bangles2.png"></div>
+      <div class="info"><h3>Filigree Designer Bangles</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <div class="card" data-cat="bangles">
+      <div class="media"><img src="images/bangles3.png"></div>
+      <div class="info"><h3>Diamond-Cut Bangles</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+    <!-- OTHERS -->
+    <div class="card" data-cat="others">
+      <div class="media"><img src="images/others.png"></div>
+      <div class="info"><h3>Grand Gold Vaddanam</h3><button class="btn-view">View Full Image</button></div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="py-12 bg-rich-brown text-soft-cream px-6 md:px-12">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8">
+    <div>
+      <h4 class="text-3xl font-playfair font-bold text-elegant-gold">JAI RAJENDRA JEWELLERS</h4>
+      <p class="mt-2 text-sm text-gray-400">Crafting tomorrow's heirlooms, today.</p>
+    </div>
+
+    <div class="flex space-x-6">
+      <a href="https://www.instagram.com/jairajendrajewellers.pdp/" target="_blank" class="hover:text-elegant-gold">Instagram</a>
+      <a href="https://wa.me/919490047092" target="_blank" class="hover:text-elegant-gold">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/919490047092?text=Hello! I wish to enquire about your jewellery collection."
+   class="whatsapp-button" target="_blank">
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M.057 24l1.687-6.163C.7 16.033.153 13.988.154 11.89.157 5.333 5.49 0 12.046 0c3.18.002 6.166 1.241 8.412 3.49 2.246 2.247 3.483 5.235 3.48 8.413C23.935 18.459 18.6 23.795 12.045 23.795c-1.99 0-3.95-.5-5.688-1.447L.057 24z" />
+  </svg>
+</a>
+
+<!-- MODAL -->
+<div id="zoomModal">
+  <button class="modal-close" id="closeModal">×</button>
+  <div class="modal-card">
+    <img id="modalImg" src="">
+  </div>
+</div>
+
+<!-- JS -->
+<script>
+  // Mobile Menu
+  document.getElementById('menuToggle').onclick = () => {
+    let menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('open');
+  };
+
+  // Filtering
+  const pills = document.querySelectorAll('.pill');
+  const cards = document.querySelectorAll('.card');
+
+  pills.forEach(pill => {
+    pill.onclick = () => {
+      pills.forEach(x => x.classList.remove("active"));
+      pill.classList.add("active");
+      let filter = pill.dataset.filter;
+
+      cards.forEach(card => {
+        card.style.display = (filter === "all" || card.dataset.cat === filter) ? "block" : "none";
+      });
+    };
+  });
+
+  // MODAL
+  const modal = document.getElementById("zoomModal");
+  const modalImg = document.getElementById("modalImg");
+  const closeModal = document.getElementById("closeModal");
+
+  document.querySelectorAll(".btn-view").forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      let img = btn.closest(".card").querySelector("img").src;
+      modalImg.src = img;
+      modal.style.display = "flex";
+      setTimeout(() => modal.classList.add("open"), 10);
+    };
+  });
+
+  const closeFunction = () => {
+    modal.classList.remove("open");
+    setTimeout(() => modal.style.display = "none", 300);
+  };
+
+  closeModal.onclick = closeFunction;
+  modal.onclick = (e) => { if (e.target === modal) closeFunction(); };
+</script>
+
+</body>
+</html>
