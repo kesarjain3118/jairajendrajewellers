@@ -1,5 +1,5 @@
 Jai Rajendra Jewellers - A Digital Jewellery Showcase
- https://kesarjain3118.github.io/jairajendrajewellers/
+[ https://kesarjain3118.github.io/jairajendrajewellers/](https://jairajendrajewellerspdp11.netlify.app/)
 
 Welcome to the official repository for the Jai Rajendra Jewellers website. This project is a beautiful and elegant digital showcase designed to present the exquisite collections of a luxury jewelry brand. Built with HTML, Tailwind CSS, and JavaScript, the site offers a clean, modern, and fully responsive experience for visitors to explore the brand's offerings.
 
